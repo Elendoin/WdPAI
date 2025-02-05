@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+}
+
+.browse-container{
+    height:100vh;
+    width:100vw;
+
+    background-color: black;
+    color: white;
+    font-family: Arial;
+    font-style: normal;
+}
+
+.white-img{
+    filter: invert(100%) sepia(0%) saturate(7488%) hue-rotate(208deg) brightness(98%) contrast(98%);
+}
