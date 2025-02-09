@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <title>LOGIN</title>
 </head>
 <head>
     <body>
         <div class = "container">
             <div class = "logo-container">
-                <img src="../img/text_logo.svg">
+                <img src="public/img/text_logo.svg">
             </div>
             <div class = "login-container">
-                <form>
+                <form class = "login", action = "login", method = "POST">
+                    <div class = "messages">
+                        <?php
+                            if(isset($messages)){
+                                    foreach($messages as $message){
+                                        echo $message;
+                                    }
+                            }
+                        ?>
+                    </div>
                     <div class = "login-text">Username</div>
                     <input class = "email-input" name="email" type="text" placeholder="email@email.com">
                     <div class = "login-text">Password</div>
                     <input class = "email-input" name="password" type="password" placeholder="password">
-                    <button class = "login-button">Log in</button>
+                    <button class = "login-button", type = "submit">Log in</button>
                     <button class = "register-button">Register</button>
                     <p class = "login-text" id="datetime", style = "display: flex; justify-content: center;"></p>
                     <script>
