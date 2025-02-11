@@ -35,18 +35,22 @@ class SuggestionRepository extends Repository{
     public function addSuggestion(Suggestion $suggestion) : void{
         session_start();
         $date = new DateTime();
-        $statement = $this->database->connect()->prepare("INSERT INTO suggestions
-        (title, description, created_at, id_suggested_by, image) 
-        VALUES (?, ?, ?, ?, ?)");
 
         if(session_status() === PHP_SESSION_NONE){
             header("Location: /login");
             exit;
         }
         else{
-            $assignedById = $_SESSION['user']->getId();
+            $statement = $this->database->connect()->prepare("SELECT id FROM users WHERE email = :email");
+            $statement->bindValue(':email', $_SESSION['user']->getEmail(), PDO::PARAM_STR);
+            $statement->execute();
+
+            $assignedById = $statement->fetchColumn();
         }
 
+        $statement = $this->database->connect()->prepare("INSERT INTO suggestions
+        (title, description, created_at, id_suggested_by, image) 
+        VALUES (?, ?, ?, ?, ?)");
 
         $statement->execute(
             [$suggestion->getTitle(),
@@ -55,6 +59,7 @@ class SuggestionRepository extends Repository{
             $assignedById,
             $suggestion->getImage()]
         );
+        header('Location: /suggestions');
         exit;
     }
 

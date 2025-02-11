@@ -8,19 +8,10 @@ Class DefaultController extends AppController{
             session_start();
         }
         if($_SESSION['user'] === null){
-            return $this->render('login');
+            header('Location: /login');
+            exit;
         }
-        return $this->render('browse');
-    }
-
-    public function dailyQuiz() {
-        if(session_status() === PHP_SESSION_NONE){
-            session_start();
-        }
-        if($_SESSION['user'] === null){
-            header('Location: login');
-        }
-        return $this->render('browse');
+        header('Location: /dailyQuiz');
     }
 
     public function upload() {

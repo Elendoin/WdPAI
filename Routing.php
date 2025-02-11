@@ -3,6 +3,7 @@
 require_once 'src/controllers/DefualtController.php';
 require_once 'src/controllers/SecurityController.php';
 require_once 'src/controllers/SuggestionController.php';
+require_once 'src/controllers/QuizController.php';
 
 Class Routing{
     public static $routes;

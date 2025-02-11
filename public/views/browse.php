@@ -5,6 +5,7 @@
     <script src="public/scripts/profileButton.js" defer></script>
     <script src="public/scripts/limitQuestionText.js" defer></script>
     <script src="public/scripts/currentDate.js" defer></script>
+    <script src="public/scripts/answers.js" defer></script>
     <title>Popdle</title>
 </head>
 <head>
@@ -15,11 +16,11 @@
                     <a href = "dailyQuiz">
                         <i class="fa-solid fa-house"></i>
                     </a>
-                    <a href = "dailyQuiz">
+<!--                    <a href = "dailyQuiz">
                         <i class="fa-solid fa-gear"></i>
-                    </a>
+                    </a>-->
                     <i class="fa-solid fa-chart-simple"></i>
-                    <a href="suggestions">Suggestions</a>
+                    <a href="suggestions"><i class="fa-solid fa-lightbulb"></i></a>
                 </div>
                 <img src="public/img/text_logo.svg" class = "logo">
                 <div class = "right-nav-content">
@@ -35,19 +36,28 @@
             </nav>
             <header>
                 <b>Today's question:</b>
+
             </header>
             <main class = 'browse-end'>
                 <section class="dailyQuiz">
-                    <img src = 'public/img/Star_Wars_Logo.png'>
-                    <p>Who was it?Who was it?Who was it?Who was it?Who was it?Who was it?
-                        Who was it?Who was it?Who was it?Who was it?Who was it?Who was it?
-                        Who was it?Who was it?Who was it?Who was it?Who was it?Who was it?
-                    </p>
-                    <form class = "quizOptions">
-                        <button>A</button>
-                        <button>B</button>
-                        <button>C</button>
-                        <button>D</button>
+                    <img src = '<?=$question->getImage();?>'>
+                    <p><?=$question->getContent();?></p>
+                    <form class = "quizOptions" data-correct="<?=$question->getCorrectAnswer();?>" action = "">
+                        <button data-option="1">
+                            <b>A: </b>
+                            <?=$question->getOptionA();?>
+                        </button>
+                        <button data-option="2">
+                            <b>B: </b>
+                            <?=$question->getOptionB();?></button>
+                        <button data-option="3">
+                            <b>C: </b>
+                            <?=$question->getOptionC();?>
+                        </button>
+                        <button data-option="4">
+                            <b>D: </b>
+                            <?=$question->getOptionD();?>
+                        </button>
                     </form>
                 </section>
             </main>

@@ -50,4 +50,49 @@ class UserRepository extends Repository{
             [$user->getEmail(), $user->getPassword(), $maxDetailsId, $maxStatsId]
         );
     }
+
+    public function getId(User $user) : int{
+        $statement = $this->database->connect()->prepare("SELECT id FROM users WHERE email = :email");
+        $statement->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+    public function getUserStatsId(User $user) : int{
+        $statement = $this->database->connect()->prepare("SELECT id_user_stats FROM users WHERE email = :email");
+        $statement->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetchColumn();
+    }
+
+    public function playedToday(int $id_user_stats): bool{
+        $statement = $this->database->connect()->prepare("SELECT last_answered FROM
+                                                                user_stats WHERE id = :id");
+        $statement->bindValue(':id', $id_user_stats, PDO::PARAM_INT);
+        $statement->execute();
+
+        $lastAnswered = $statement->fetchColumn();
+
+        if($lastAnswered === date("Y-m-d")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function incrementWin($id){
+        $statement = $this->database->connect()->prepare(
+            "UPDATE user_stats SET wins = wins + 1, last_answered = current_date WHERE id = :id");
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
+
+    public function incrementLosses($id){
+        $statement = $this->database->connect()->prepare(
+            "UPDATE user_stats SET losses = losses + 1, last_answered = current_date WHERE id = :id");
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+    }
 }

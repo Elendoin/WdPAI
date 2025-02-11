@@ -158,6 +158,10 @@ button{
     text-align: center;
 }
 
+.upload-button{
+    color: white;
+}
+
 header{
     height: 6%;
     width: 100%;
@@ -171,6 +175,17 @@ header{
 main{
     height: 82vh;
     width: 100%;
+
+    align-items: flex-end;
+}
+
+.suggestions-main{
+    height: 75%;
+    width: 100%;
+
+
+    align-self: flex-end;
+    margin: 2em;
 }
 
 .browse-end{
@@ -255,7 +270,7 @@ main{
 
 .franchise-container, .suggestions-container {
     width: 360px;
-    height: 470px;
+    height: 440px;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -14,11 +14,8 @@
                 <a href = "dailyQuiz">
                     <i class="fa-solid fa-house"></i>
                 </a>
-                <a href = "dailyQuiz">
-                    <i class="fa-solid fa-gear"></i>
-                </a>
                 <i class="fa-solid fa-chart-simple"></i>
-                <a href="suggestions">Suggestions</a>
+                <a href="suggestions"><i class="fa-solid fa-lightbulb"></i></a>
             </div>
             <img src="public/img/text_logo.svg" class = "logo">
             <div class = "right-nav-content">
@@ -34,23 +31,22 @@
         </nav>
         <header>
             <div class="browse-tools">
-                <div class = "browse-toggles">
-                    <button>Top</button>
-                    <button>New</button>
-                </div>
                 <b>Current suggestions:</b>
                 <div class = "browse-searchbar">
                     <input placeholder = "Search for a suggestion"></input>
                 </div>
+                <a class = "upload-button" href = "addSuggestion">
+                    <i class="fa-solid fa-upload"></i>
+                </a>
             </div>
         </header>
-        <main>
+        <main class = "suggestions-main">
             <section class="suggestions" id = "suggestions">
                 <?php foreach($suggestions as $suggestion): ?>
                 <div class="suggestions-container">
                     <h2><?=$suggestion->getTitle()?></h2>
                     <img src="public/uploads/<?= $suggestion->getImage();?>" class="franchise-images">
-                    <p>es</p>
+                    <p><?= $suggestion->getDescription();?></p>
                 </div>
                 <?php endforeach; ?>
             </section>

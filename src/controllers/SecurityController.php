@@ -85,4 +85,70 @@ class SecurityController extends AppController{
         session_destroy();
         return $this->render('login');
     }
+
+    public function playedToday(){
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if($contentType == 'application/json') {
+            if(session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (!isset($_SESSION['user'])) {
+                echo json_encode(["error" => "User not logged in"]);
+                http_response_code(401);
+                exit;
+            }
+            $user = $_SESSION['user'];
+
+            header("Content-Type: application/json");
+
+            $userRepository = new UserRepository();
+            $id = $userRepository->getUserStatsId($user);
+
+
+            $hasPlayed = $userRepository->playedToday($id);
+            echo json_encode(["played" => $hasPlayed]);
+            exit;
+        }
+    }
+
+    public function win(){
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if($contentType == 'application/json') {
+            if(session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (!isset($_SESSION['user'])) {
+                echo json_encode(["error" => "User not logged in"]);
+                http_response_code(401);
+                exit;
+            }
+            $user = $_SESSION['user'];
+            header("Content-Type: application/json");
+            $userRepository = new UserRepository();
+            $id = $userRepository->getUserStatsId($user);
+            $userRepository->incrementWin($id);
+            exit;
+        }
+    }
+
+    public function lose(){
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        if($contentType == 'application/json') {
+            if(session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (!isset($_SESSION['user'])) {
+                echo json_encode(["error" => "User not logged in"]);
+                http_response_code(401);
+                exit;
+            }
+            $user = $_SESSION['user'];
+            header("Content-Type: application/json");
+            $userRepository = new UserRepository();
+            $id = $userRepository->getUserStatsId($user);
+            $userRepository->incrementLosses($id);
+            exit;
+        }
+    }
 }
