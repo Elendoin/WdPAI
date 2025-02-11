@@ -44,10 +44,12 @@
                         }
                     }
                     ?>
-                    <div class = "browse-searchbar">
+                    <div class = "title-bar">
                         <input name = "title" type = "text" placeholder = "title">
                     </div>
-                    <textarea name = "description" rows = "5" placeholder="description"></textarea>
+                    <div class="description-container">
+                        <textarea class = "desc" name = "description" rows = "5" placeholder="description"></textarea>
+                    </div>
                     <input type = "file", name = "file">
                     <button type = "submit">Submit</button>
                 </form>

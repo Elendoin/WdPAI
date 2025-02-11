@@ -317,3 +317,43 @@ main{
     justify-content: center;
     align-items: center;
 }
+
+.title-bar{
+    width: 40%;
+    display:flex;
+    justify-content: center;
+
+    padding-bottom: 2em;
+}
+
+.title-bar>input{
+    width: 50%;
+    height: 3.5vh;
+
+    color: white;
+    background: #000000;
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+
+    text-align: center;
+}
+
+.description-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2em;
+}
+
+.desc{
+    width: 20vw;
+    height: 10vh;
+
+    color: white;
+    background: #000000;
+    border: 1px solid #FFFFFF;
+    border-radius: 100px;
+
+    text-align: center;
+    justify-self: center;
+}
