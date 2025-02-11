@@ -20,23 +20,42 @@ class SuggestionRepository extends Repository{
         return new Suggestion($suggestion['title'], $suggestion['description'], $suggestion['image']);
     }
 
+    public function getSuggestionByTitle(string $title) {
+        $title = '%'.strtolower($title).'%';
+
+        $statement = $this->database->connect()->prepare("SELECT * FROM suggestions WHERE lower(title) = :title
+                             or lower(description) LIKE :title");
+        $statement->bindValue(':title', $title, PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
     public function addSuggestion(Suggestion $suggestion) : void{
+        session_start();
         $date = new DateTime();
         $statement = $this->database->connect()->prepare("INSERT INTO suggestions
-        (title, description, suggested_fields, created_at, id_suggested_by, image) 
-        VALUES (?, ?, ?, ?, ?, ?)");
+        (title, description, created_at, id_suggested_by, image) 
+        VALUES (?, ?, ?, ?, ?)");
 
-        $assignedById = 5;
+        if(session_status() === PHP_SESSION_NONE){
+            header("Location: /login");
+            exit;
+        }
+        else{
+            $assignedById = $_SESSION['user']->getId();
+        }
 
 
         $statement->execute(
             [$suggestion->getTitle(),
             $suggestion->getDescription(),
-            $suggestion->getDescription(),
             $date->format('Y-m-d'),
             $assignedById,
             $suggestion->getImage()]
         );
+        exit;
     }
 
     public function getSuggestions(): array{

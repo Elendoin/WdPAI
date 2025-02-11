@@ -2,57 +2,53 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/browsestyle.css">
     <script src="https://kit.fontawesome.com/c4c0a58e47.js" crossorigin="anonymous"></script>
+    <script src="public/scripts/profileButton.js" defer></script>
+    <script src="public/scripts/limitQuestionText.js" defer></script>
+    <script src="public/scripts/currentDate.js" defer></script>
     <title>Popdle</title>
 </head>
 <head>
     <body>
         <div class = "browse-container">
             <nav>
-                <div class="left-nav-content">   
-                    <i class="fa-solid fa-house"></i>
-                    <i class="fa-solid fa-gear"></i>
+                <div class="left-nav-content">
+                    <a href = "dailyQuiz">
+                        <i class="fa-solid fa-house"></i>
+                    </a>
+                    <a href = "dailyQuiz">
+                        <i class="fa-solid fa-gear"></i>
+                    </a>
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <a href="suggestions">Suggestions</a>
                 </div>
                 <img src="public/img/text_logo.svg" class = "logo">
                 <div class = "right-nav-content">
                     <p id="datetime"></p>
-                    <script>
-                        var now = new Date();
-                        var datetime = now.toLocaleString();
-                        var day = String(now.getDate()).padStart(2, '0');
-                        var month = String(now.getMonth() + 1).padStart(2, '0');
-                        var year = now.getFullYear();
-
-                        var formattedDate = day + '.' + month + '.' + year;
-
-                        document.getElementById("datetime").innerHTML = formattedDate;
-                    </script>
-                    <i class="fa-solid fa-user"></i>
+                    <div id="popup" class="popup">
+                        <p class="logout-text">Logged in as: <strong><?php echo $_SESSION['user']->getName(); ?></strong></p>
+                        <form method = "POST" action="logout";>
+                            <button class = "logout-button" type="submit">Log Out</button>
+                        </form>
+                    </div>
+                    <i class="fa-solid fa-user" id="profileButton"></i>
                 </div>
             </nav>
             <header>
-                <div class="browse-tools">
-                    <div class = "browse-toggles">
-                        <button>Favorite</button>
-                        <button>Top</button>
-                        <button>New</button>
-                    </div>
-                    <b>Select a franchise:</b>
-                    <div class = "browse-searchbar">
-                        <input placeholder = "Search for a franchise"></input>
-                    </div>
-                </div>
+                <b>Today's question:</b>
             </header>
-            <main>
-                <section class="franchises">
-                    <div class="franchise-container">
-                        <img src="public/img/Star_Wars_Logo.png" class="franchise-images">
-                    </div>
-                    <div class="franchise-container">
-                        <img src="public/img/International_Pokémon_logo.svg.png" class="franchise-images">
-                    </div>
-                    <div class="franchise-container">
-                        <img src="public/uploads/<?= $franchise->getImage();?>" class="franchise-images">
-                    </div>
+            <main class = 'browse-end'>
+                <section class="dailyQuiz">
+                    <img src = 'public/img/Star_Wars_Logo.png'>
+                    <p>Who was it?Who was it?Who was it?Who was it?Who was it?Who was it?
+                        Who was it?Who was it?Who was it?Who was it?Who was it?Who was it?
+                        Who was it?Who was it?Who was it?Who was it?Who was it?Who was it?
+                    </p>
+                    <form class = "quizOptions">
+                        <button>A</button>
+                        <button>B</button>
+                        <button>C</button>
+                        <button>D</button>
+                    </form>
                 </section>
             </main>
         </div>

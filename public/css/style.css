@@ -29,7 +29,16 @@ img {
 
 .login-container {
     display: flex;
+    flex-direction: column;
     height: 80%;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-container {
+    display: flex;
+    height: 100%;
     width: 50%;
     align-items: center;
     justify-content: center;
@@ -56,6 +65,18 @@ input{
     margin-bottom: 2em;
 }
 
+.register-input{
+    height: 0.5em;
+}
+
+a{
+    font-family: Arial;
+}
+
+p{
+    font-family: Arial;
+}
+
 
 button {
     width: 180px;
@@ -79,6 +100,19 @@ button {
     border-radius: 100px;
 }
 
+.login-button:hover {
+    color: white;
+    background: green;
+    border: green;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    color: white;
+    background: black;
+    cursor: pointer;
+}
+
 form {
     line-height: 2em;
     display: flex;
@@ -87,11 +121,20 @@ form {
     align-items: center;
 }
 
+.no-valid {
+    border: 3px solid red;
+    border-radius: 1em;
+    outline: none;
+}
+
+
+
 @media only screen and (max-device-width: 440px){
 
     .login-container {
         display: flex;
-        height: 80%;
+        flex-direction: column;
+        height: 90%;
         width: 100%;
     }
 

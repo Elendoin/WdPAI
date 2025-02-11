@@ -19,15 +19,35 @@ class SuggestionController extends AppController{
         $this->suggestionRepository = new SuggestionRepository();
     }
 
+    public function search(){
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+
+        if($contentType == 'application/json') {
+            $content = trim(file_get_contents('php://input'));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            echo json_encode($this->suggestionRepository->getSuggestionByTitle($decoded['search']));
+        }
+    }
+
 
     public function addSuggestion(){
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
+        if($_SESSION['user'] === null){
+            return $this->render('login');
+        }
         if($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file($_FILES['file']['tmp_name'], dirname(__DIR__).self::UPLOAD_DIR . $_FILES['file']['name']);
 
             $suggestion = new Suggestion($_POST['title'], $_POST['description'], $_FILES['file']['name']);
             $this->suggestionRepository->addSuggestion($suggestion);
 
-            return $this->render('suggestions', ['messages' => $this->messages, 'suggestion' => $suggestion]);
+            return $this->render('suggestions', ['messages' => $this->messages, 'suggestions' => $this->suggestionRepository->getSuggestions()]);
         }
 
         return $this->render('addSuggestion', ['messages' => $this->messages]);
@@ -46,7 +66,13 @@ class SuggestionController extends AppController{
     }
 
     public function suggestions(){
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }
+        if($_SESSION['user'] === null){
+            return $this->render('login');
+        }
         $suggestions = $this->suggestionRepository->getSuggestions();
-        $this->render('suggestions', ['suggestions' => $suggestions]);
+        return $this->render('suggestions', ['suggestions' => $suggestions]);
     }
 }

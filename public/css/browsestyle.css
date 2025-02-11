@@ -2,6 +2,7 @@ body{
     margin: 0;
 }
 
+
 .browse-container{
     height:100vh;
     width:100vw;
@@ -21,7 +22,7 @@ body{
 }
 
 nav{
-    height:7%;
+    height:10%;
     width: 99%;
 
     display: flex;
@@ -34,7 +35,7 @@ nav{
 
 .left-nav-content{
     height:100%;
-    width: 25%;
+    width: 45%;
 
     display:flex;
     justify-content: left;
@@ -42,28 +43,49 @@ nav{
 
 .left-nav-content>i{
     font-size: 2.8em;
-    margin-left: 5%
+    margin-left: 5%;
+    align-self: center;
+}
+.left-nav-content>a>i{
+    font-size: 2.8em;
+    margin-left: 5%;
+}
+
+.left-nav-content>a{
+    margin-left: 5%;
+    color: white;
+    align-self: center;
 }
 
 
 .logo{
     filter: invert(100%) sepia(0%) saturate(7488%) hue-rotate(208deg) brightness(98%) contrast(98%);
     height: 90%;
-    width: 50%;
+    width: 10%;
 
     display:flex;
     justify-content: center;
 }
 
 .right-nav-content{
-    height: 100%;
-    width: 25%;
+    height: 50%;
+    width: 45%;
 
     display:flex;
     justify-content: right;
+    align-items: baseline;
     font-weight: bold;
+    margin-top: 5px;
 }
 
+.popup{
+    display: none;
+    padding-left: 20px;
+    padding-right: 15px;
+    align-items: center;
+    justify-content: center;
+
+}
 
 .right-nav-content>i{
     font-size: 2.8em;
@@ -71,8 +93,18 @@ nav{
     margin-left: 5%;
 }
 
+.right-nav-content>i:hover{
+    cursor: pointer;
+}
+
+.logout-button:hover{
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
 .browse-tools{
-    height:100%; 
+    height:100%;
     width: 100vw;
 
     display: flex;
@@ -90,14 +122,20 @@ nav{
     margin-left: 2em;
 }
 
-.browse-toggles>button{
-    width:20%;
-    height: 3.5vh;
-
+button{
     color: white;
     background: #000000;
     border: 1px solid #FFFFFF;
     border-radius: 100px;
+}
+
+.browse-toggles>button{
+    width:20%;
+    height: 3.5vh;
+}
+
+.logout-text{
+    padding-right: 10px;
 }
 
 .browse-searchbar{
@@ -120,28 +158,37 @@ nav{
     text-align: center;
 }
 
-.browse-tools>b{
-    width: 40%;
-    text-align: center;
-    font-size: 2em;
-}
-
-
 header{
-    height: 6vh;
+    height: 6%;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    font-size: 2em;
+    padding-top: 0.3em;
 }
+
 
 main{
-    height: 85vh;
+    height: 82vh;
     width: 100%;
 }
 
-section{
+.browse-end{
+    height: 72%;
+    max-height:80%;
+    display: flex;
+    align-items: flex-end;
+
+    margin: 3%;
+}
+
+.suggestions{
     height: auto;
-    max-height: 65vh;
+    max-height: 75%;
+    width: auto;
 
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1em;
     padding: 2em;
     overflow: auto;
@@ -149,15 +196,68 @@ section{
     margin: 5%;
 }
 
-.franchise-images {
-    max-width: 90%;
-    max-height: 90%;
+.dailyQuiz
+{
+    height: 100%;
+    width: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+
+    margin: 0;
 }
 
-.franchise-container {
-    width: 180px;
-    height: 250px;
+.dailyQuiz>img{
+    max-height:30%;
+    max-width: 50%;
+}
+
+.dailyQuiz>p{
+    width:70%;
     display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quizOptions{
+    width: 100%;
+    height: 40%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: end;
+    justify-content: center;
+}
+
+.quizOptions>button{
+    width: 50%;
+    height: 60%;
+
+    justify-self: center;
+}
+
+.quizOptions>button:hover{
+    background-color: #FFFFFF;
+    color: black;
+    cursor: pointer;
+}
+
+.franchise-images {
+    max-width: 300px;
+    max-height: 150px;
+}
+
+.franchise-container, .suggestions-container {
+    width: 360px;
+    height: 470px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: black;
@@ -174,3 +274,5 @@ section{
     justify-content: center;
     align-items: center;
 }
+
+
