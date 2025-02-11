@@ -23,7 +23,11 @@ class QuizController extends AppController{
         }
 
         $question = $this->questionRepository->getTodaysQuestion();
-        return $this->render('browse', ['question' => $question]);
+        $userRepository = new UserRepository();
+
+        $_SESSION['wins'] = $userRepository->getWins($_SESSION['user']);
+        $_SESSION['losses'] = $userRepository->getLosses($_SESSION['user']);
+        return $this->render('browse', ['question' => $question,]);
     }
 
 }

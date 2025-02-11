@@ -10,12 +10,13 @@ quizForm.querySelectorAll("button").forEach(button => {
         const selectedOption = button.getAttribute("data-option");
 
         if (selectedOption === correctAnswer) {
-            button.style.backgroundColor = "green";
+            button.style.borderColor = "green";
+            button.style.backgroundColor = "darkgreen";
             correct = true;
             sendStats();
 
         } else {
-            button.style.backgroundColor = "red";
+            button.style.borderColor = "red";
             correct = false;
             sendStats();
         }
@@ -29,11 +30,12 @@ function turnOffAllButtons() {
         const selectedOption = button.getAttribute("data-option");
 
         if (selectedOption === correctAnswer) {
-            button.style.backgroundColor = "green";
+            button.style.borderColor = "green";
+            button.style.backgroundColor = "darkgreen";
             button.style.pointerEvents = "none";
             button.style.transition = "none";
         } else {
-            button.style.backgroundColor = "red";
+            button.style.borderColor = "red";
             button.style.pointerEvents = "none";
             button.style.transition = "none";
         }
@@ -79,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (data.played) {
             turnOffAllButtons();
         } else {
-            console.log("User can play!");
+            console.log("playable");
         }
         })
         .catch(error => console.error("Error fetching play status:", error));

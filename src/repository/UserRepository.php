@@ -95,4 +95,26 @@ class UserRepository extends Repository{
         $statement->bindValue(':id', $id, PDO::PARAM_INT);
         $statement->execute();
     }
+
+    public function getWins(User $user): int{
+        $id = $this->getUserStatsId($user);
+        $statement = $this->database->connect()->prepare("SELECT wins FROM user_stats WHERE id = :id");
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+
+        $wins = $statement->fetchColumn();
+
+        return $wins;
+    }
+
+    public function getLosses(User $user): int{
+        $id = $this->getUserStatsId($user);
+        $statement = $this->database->connect()->prepare("SELECT losses FROM user_stats WHERE id = :id");
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
+        $statement->execute();
+
+        $wins = $statement->fetchColumn();
+
+        return $wins;
+    }
 }

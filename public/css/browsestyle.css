@@ -57,6 +57,15 @@ nav{
     align-self: center;
 }
 
+.left-nav-content>a:hover{
+    color: grey;
+}
+
+.left-nav-content>i:hover{
+    color: grey;
+    cursor: pointer;
+}
+
 
 .logo{
     filter: invert(100%) sepia(0%) saturate(7488%) hue-rotate(208deg) brightness(98%) contrast(98%);
@@ -95,6 +104,7 @@ nav{
 
 .right-nav-content>i:hover{
     cursor: pointer;
+    color: grey;
 }
 
 .logout-button:hover{
@@ -290,4 +300,20 @@ main{
     align-items: center;
 }
 
+.stats{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
+    width: 200px;
+    height: 250px;
+    border: 1px solid white;
+    color: white;
+    background: #4b4746;
+    font-family: Arial;
+    justify-content: center;
+    align-items: center;
+}

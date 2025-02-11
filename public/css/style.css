@@ -102,8 +102,8 @@ button {
 
 .login-button:hover {
     color: white;
-    background: green;
-    border: green;
+    background: black;
+    border: green solid 3px;
     cursor: pointer;
 }
 
