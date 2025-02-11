@@ -47,7 +47,14 @@ class SuggestionController extends AppController{
             $suggestion = new Suggestion($_POST['title'], $_POST['description'], $_FILES['file']['name']);
             $this->suggestionRepository->addSuggestion($suggestion);
 
-            return $this->render('suggestions', ['messages' => $this->messages, 'suggestions' => $this->suggestionRepository->getSuggestions()]);
+
+            $id_suggestion = $this->suggestionRepository->getMaxId();
+            $userRepository = new UserRepository();
+            $id_user =  $userRepository->getId($_SESSION['user']);
+
+            $this->suggestionRepository->linkUsers();
+
+            header("Location: /suggestions");
         }
 
         return $this->render('addSuggestion', ['messages' => $this->messages]);

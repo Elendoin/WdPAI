@@ -48,6 +48,7 @@ class SuggestionRepository extends Repository{
             $assignedById = $statement->fetchColumn();
         }
 
+
         $statement = $this->database->connect()->prepare("INSERT INTO suggestions
         (title, description, created_at, id_suggested_by, image) 
         VALUES (?, ?, ?, ?, ?)");
@@ -59,8 +60,13 @@ class SuggestionRepository extends Repository{
             $assignedById,
             $suggestion->getImage()]
         );
-        header('Location: /suggestions');
-        exit;
+    }
+
+    public function getMaxId() : ?int{
+        $statement = $this->database->connect()->prepare("SELECT MAX(id) FROM suggestions");
+        $statement->execute();
+
+        return $statement->fetchColumn();
     }
 
     public function getSuggestions(): array{
@@ -74,6 +80,13 @@ class SuggestionRepository extends Repository{
         }
 
         return $result;
+    }
+
+    public function linkUsers(){
+        $userRepository = new UserRepository();
+        $statement = $this->database->connect()->prepare("INSERT INTO user_suggestions (id_user, id_suggestion)
+                                                                VALUES (?, ?)");
+        $statement->execute([$userRepository->getId($_SESSION['user']), $this->getMaxId()]);
     }
 
 }
